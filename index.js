@@ -22,17 +22,23 @@ document.querySelector('form').addEventListener('submit',addMovie);
 
 function deleteMovie(event) {
     event.target.parentNode.remove();
-    const text = event.target.parentNode.textContent
-    message.textContent = `You have deleted: "${text.slice(0,text.length-1)}"`
+    message.textContent = `You have deleted: "${event.target.parentNode.querySelector('span').textContent}"`;
+    revealMessage();
 }
 
 function crossOffMovie(event) {
     event.target.classList.toggle('checked');
-    const text = event.target.parentNode.textContent
     if (!event.target.classList.contains('checked')) {
-        message.textContent = `You have not watched "${text.slice(0,text.length-1)}"`
+        message.textContent = `You have not watched "${event.target.textContent}"`;
     } else {
-        message.textContent = `You have watched "${text.slice(0,text.length-1)}"`
+        message.textContent = `You have watched "${event.target.textContent}"`;
     }
+    revealMessage();
 }
 
+function revealMessage() {
+    message.classList.remove('hide');
+    setTimeout(() => {
+        message.classList.add("hide")
+    }, 1000);
+}
